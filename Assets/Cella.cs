@@ -7,11 +7,33 @@ public class Cella : MonoBehaviour
 
     public GameObject oggetto;
 
-    
-    
-    
-    
-    
+    [SerializeField] private int x;
+    [SerializeField] private int y;
+
+    public int GetX()
+    {
+        return x;
+    }
+
+    public int GetY()
+    {
+        return y;
+    }
+
+    public void SetX(int i)
+    {
+        x = i;
+    }
+    public void SetY(int i)
+    {
+        y = i;
+    }
+
+
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {

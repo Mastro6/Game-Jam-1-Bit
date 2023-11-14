@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Grighia : MonoBehaviour {
 
+    public Giocatore giocatore;
+
 
     public int altezza;
     public int larghezza;
@@ -13,8 +15,7 @@ public class Grighia : MonoBehaviour {
 
     public Texture2D livelloPixel;
 
-
-    public GameObject[,] arrayOggetti;
+    public GameObject[,] arrayCelle;
 
     public Color32[,] arraycolori32;
 
@@ -22,6 +23,15 @@ public class Grighia : MonoBehaviour {
 
     public GameObject bomba;
 
+    public Oggetto[,] arrayOggetti;
+
+
+    public Color32 coloreGiocatore;
+
+    public Color32 coloreBomba;
+
+
+    public GameObject giocatorePrefab;
 
 
     private void Start()
@@ -35,53 +45,31 @@ public class Grighia : MonoBehaviour {
         arraycolori32 = new Color32[livelloPixel.width, livelloPixel.height];
 
 
-        arrayOggetti = new GameObject[livelloPixel.width, livelloPixel.height];
+        arrayCelle = new GameObject[livelloPixel.width, livelloPixel.height];
 
-        Color32 arancio = new Color32(223, 113, 38, 255);
-        Color32 giallo = new Color32(251, 242, 54, 255);
-
+        arrayOggetti = new Oggetto[livelloPixel.width, livelloPixel.height];
 
 
         for (int x = 0; x < livelloPixel.width; x++)
         {
             for (int y = 0; y < livelloPixel.height; y++)
             {
-                //print(x + " " + y);
                 GameObject ogg = Instantiate(CellaVuova, new Vector3(x * dimensioneCella, y * dimensioneCella, 0), Quaternion.identity);
                 ogg.name = x.ToString() + y.ToString();
-                
-                arrayOggetti[x, y] = ogg;
+                Cella scriptCella = ogg.GetComponent<Cella>();
+                scriptCella.SetX(x);
+                scriptCella.SetY(y);
+
+                arrayCelle[x, y] = ogg;
 
 
                 arraycolori32[x, y] = arraycolori32temp[x + y * livelloPixel.width];
 
 
-
-                //ogg.GetComponent<SpriteRenderer>().color = arraycolori32[x, y];
-
-
-
-
-                if (arraycolori32[x, y].Equals(arancio))
-                {
-                    
-
-                    GameObject bombaTemp = Instantiate(bomba, new Vector3(x * dimensioneCella, y * dimensioneCella, 0), Quaternion.identity);
-                    bombaTemp.GetComponent<Bomba>().CellaMadre = ogg;
-                    ogg.GetComponent<Cella>().oggetto = bombaTemp;
-
-
-                } else if (arraycolori32[x, y].Equals(giallo))
-                {
-                    print("giallo");
-                }
-
-
-
+                CreaOggetto(x, y, arraycolori32[x, y]);
 
             }
         }
-
 
 
         AggiornaGrighia();
@@ -96,14 +84,44 @@ public class Grighia : MonoBehaviour {
         {
             for (int y = 0; y < arrayOggetti.GetLength(1); y++)
             {
-                print("arriva");
-                Oggetto script = arrayOggetti[x, y].GetComponent<Oggetto>();
+                Oggetto script = arrayOggetti[x, y];
                 if (script) script.Aggiorna();
+                
             }
         }
+
+        giocatore.Aggiorna();
         print("fine aggiornamento della grighia");
     }
 
+
+    private GameObject CreaOggetto(int x, int y, Color32 colore)
+    {
+        if (colore.Equals(coloreBomba))
+        {
+            GameObject bombaTemp = Instantiate(bomba, new Vector3(x * dimensioneCella, y * dimensioneCella, 0), Quaternion.identity);
+            Oggetto script = bombaTemp.GetComponent<Bomba>();
+            script.CellaMadre = arrayCelle[x, y];
+            arrayCelle[x, y].GetComponent<Cella>().oggetto = bombaTemp;
+            GameObject conteritore = arrayCelle[x, y].transform.GetChild(0).gameObject;
+            bombaTemp.transform.SetParent(conteritore.transform);
+            arrayOggetti[x, y] = script;
+            return bombaTemp;
+        }
+        if (colore.Equals(coloreGiocatore))
+        {
+            GameObject giocatoreObj = Instantiate(giocatorePrefab, new Vector3(x * dimensioneCella, y * dimensioneCella, 0), Quaternion.identity);
+            giocatore = giocatoreObj.GetComponent<Giocatore>();
+            giocatore.grighia = this;
+            giocatore.SetPosizione(x, y, arrayCelle[x, y]);
+        }
+        return null;
+    }
+
+
+
+
+    
 
 
 }

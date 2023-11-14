@@ -17,9 +17,11 @@ public class Bomba : Oggetto
 
     public override void Aggiorna()
     {
-        print("Aggiorna Bomba");
         GetComponentInChildren<SpriteRenderer>().sprite = bombaSprite1;
-        print("fine Aggoirnamento Bomba");
+        if (CellaMadre.GetComponent<Cella>().GetX() == 3)
+        {
+            GetComponentInChildren<SpriteRenderer>().sprite = bombaSprite2;
+        }
     }
 
     public override void Attivazione()
