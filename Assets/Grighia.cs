@@ -8,8 +8,7 @@ public class Grighia : MonoBehaviour {
     public Giocatore giocatore;
 
 
-    public int altezza;
-    public int larghezza;
+    
     public float dimensioneCella;
     public GameObject CellaVuova;
 
@@ -119,9 +118,31 @@ public class Grighia : MonoBehaviour {
     }
 
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            print("input W detected");
+            giocatore.MuoviSu();
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            print("input S detected");
+            giocatore.MuoviGiu();
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            print("input D detected");
+            giocatore.MuoviDestra();
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            print("input A detected");
+            giocatore.MuoviSinistra();
+        }
+    }
 
 
-    
 
 
 }
