@@ -106,6 +106,8 @@ public class Grighia : MonoBehaviour {
             bombaTemp.transform.SetParent(conteritore.transform);
             arrayOggetti[x, y] = script;
             script.grighia = this;
+            script.posizioneX = x;
+            script.posizioneY = y;
             return bombaTemp;
         }
         if (colore.Equals(coloreGiocatore))
@@ -144,6 +146,24 @@ public class Grighia : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             AggiornaGrighia();
+        }
+        if (Input.GetKeyDown(KeyCode.K)){
+
+
+            Oggetto ogg = arrayOggetti[0, 0];
+            if (ogg)
+            {
+                Bomba bombascript = ogg.GetComponent<Bomba>();
+                if (bombascript)
+                {
+                    bombascript.RiceveDanno();
+                    return;
+                }
+            }
+
+
+
+            
         }
 
         

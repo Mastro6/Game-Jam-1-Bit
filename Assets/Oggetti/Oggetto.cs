@@ -8,26 +8,29 @@ public abstract class Oggetto : MonoBehaviour
     public GameObject CellaMadre;
     public Grighia grighia;
 
-    [SerializeField] int posizioneX;
-    [SerializeField] int posizioneY;
+    public int posizioneX;
+    public int posizioneY;
 
 
     public void RiceveDanno()
     {
         durabilita--;
 
+        Attivazione();
+
+
         if (durabilita <= 0)
         {
             Distruggi();
         }
 
-        Attivazione();
+        
 
     }
 
     private void Distruggi()
     {
-        
+        Destroy(gameObject);
     }
 
     public abstract void Attivazione();

@@ -23,11 +23,6 @@ public class Bomba : Oggetto
             GetComponentInChildren<SpriteRenderer>().sprite = bombaSprite2;
         }
 
-        if(durabilita == 0)
-        {
-            
-
-        }   
     }
 
     public override void Attivazione()
