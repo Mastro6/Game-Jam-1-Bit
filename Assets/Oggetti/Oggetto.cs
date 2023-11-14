@@ -6,6 +6,10 @@ public abstract class Oggetto : MonoBehaviour
 {
     public int durabilita;
     public GameObject CellaMadre;
+    public Grighia grighia;
+
+    [SerializeField] int posizioneX;
+    [SerializeField] int posizioneY;
 
 
     public void RiceveDanno()
@@ -23,7 +27,7 @@ public abstract class Oggetto : MonoBehaviour
 
     private void Distruggi()
     {
-
+        
     }
 
     public abstract void Attivazione();
