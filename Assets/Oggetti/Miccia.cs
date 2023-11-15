@@ -12,40 +12,29 @@ public class Miccia : Oggetto
 
     public override void Aggiorna()
     {
-
-        durabilita -= grighia.arrayDanneggiati[posizioneX, posizioneY];
-        
-
-        GetComponentInChildren<SpriteRenderer>().sprite = micciaSpenta;
-        if (haPresoDanno)
+        if(durabilita == 1)
+        {
+            GetComponentInChildren<SpriteRenderer>().sprite = micciaSpenta;
+        }
+        if (finDiVita)
         {
             GetComponentInChildren<SpriteRenderer>().sprite = micciaAttivata;
         }
 
-        if (grighia.arrayDanneggiati[posizioneX, posizioneY] > 0)
-        {
-
-            siStaPerAttivare = true;
-            haPresoDanno = false;
-        }
-
-        if (siStaPerAttivare)
+        if (grighia.copiaDanneggiati[posizioneX, posizioneY] > 0)
         {
             Attivazione();
-            siStaPerAttivare = false;
-        }
-
-        if (durabilita <= 0)
-        {
-            if (finDiVita)
+            durabilita -= grighia.copiaDanneggiati[posizioneX, posizioneY];
+            if (durabilita < 1)
             {
-                Destroy(gameObject);
+                if (finDiVita)
+                {
+                    Destroy(gameObject);
+                }
+                finDiVita = true;
             }
-            finDiVita = true;
-
         }
 
-        durabilita -= grighia.arrayDanneggiati[posizioneX, posizioneY];
     }
 
     public override void Attivazione()

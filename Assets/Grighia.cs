@@ -36,7 +36,9 @@ public class Grighia : MonoBehaviour {
 
     public GameObject giocatorePrefab;
 
-    public int[,] arrayDanneggiati;
+    public int[,] copiaDanneggiati;
+
+    public int[,] DanneggiatoNuovo;
 
 
     private void Start()
@@ -54,7 +56,9 @@ public class Grighia : MonoBehaviour {
 
         arrayOggetti = new Oggetto[livelloPixel.width, livelloPixel.height];
 
-        arrayDanneggiati = new int[livelloPixel.width, livelloPixel.height];
+        copiaDanneggiati = new int[livelloPixel.width, livelloPixel.height];
+
+        DanneggiatoNuovo = new int[arrayOggetti.GetLength(0), arrayOggetti.GetLength(1)];
 
 
         for (int x = 0; x < livelloPixel.width; x++)
@@ -86,15 +90,15 @@ public class Grighia : MonoBehaviour {
     public void AggiornaGrighia()
     {
 
-        int[,] Danneggiato = new int[arrayOggetti.GetLength(0), arrayOggetti.GetLength(1)];
+        
 
         for (int x = 0; x < arrayOggetti.GetLength(0); x++)
         {
             for (int y = 0; y < arrayOggetti.GetLength(1); y++)
             {
 
-                Danneggiato[x, y] = arrayDanneggiati[x, y];
-                arrayDanneggiati[x, y] = 0;
+                copiaDanneggiati[x, y] = DanneggiatoNuovo[x, y];
+                DanneggiatoNuovo[x, y] = 0;
             
             }
         }
@@ -107,12 +111,11 @@ public class Grighia : MonoBehaviour {
                 Oggetto script = arrayOggetti[x, y];
                 if (script) {
 
-                    print(x + y + "E danneggiato di un livello " + Danneggiato[x, y]);
+                    print(x + y + "E danneggiato di un livello " + copiaDanneggiati[x, y]);
 
 
-                    if (Danneggiato[x, y] > 0)
+                    if (copiaDanneggiati[x, y] > 0)
                     {
-                        //script.durabilita -= arrayDanneggiati[x, y];
                         script.haPresoDanno = true;
                         
                     }
@@ -132,7 +135,6 @@ public class Grighia : MonoBehaviour {
                 Oggetto script = arrayOggetti[x, y];
                 if (script) script.Aggiorna();
                 
-
             }
         }
 

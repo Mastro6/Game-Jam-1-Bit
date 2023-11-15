@@ -8,38 +8,34 @@ public class Bomba : Oggetto
     public Sprite bombaSprite1;
     public Sprite bombaSprite2;
 
+    public bool finDiVita;
+
     public override void Aggiorna()
     {
 
-        
 
-        if (durabilita <= 0)
+        if (durabilita == 1)
         {
-            Destroy(gameObject);
+            GetComponentInChildren<SpriteRenderer>().sprite = bombaSprite1;
         }
-
-        GetComponentInChildren<SpriteRenderer>().sprite = bombaSprite1;
-        if (haPresoDanno)
+        if (finDiVita)
         {
             GetComponentInChildren<SpriteRenderer>().sprite = bombaSprite2;
         }
 
-
-        if (haPresoDanno)
-        {
-            siStaPerAttivare = true;
-            
-            haPresoDanno = false;
-        }
-
-        if (siStaPerAttivare)
+        if (grighia.copiaDanneggiati[posizioneX, posizioneY] > 0)
         {
             Attivazione();
-            siStaPerAttivare = false;
+            durabilita -= grighia.copiaDanneggiati[posizioneX, posizioneY];
+            if (durabilita < 1)
+            {
+                if (finDiVita)
+                {
+                    Destroy(gameObject);
+                }
+                finDiVita = true;
+            }
         }
-
-
-        durabilita -= grighia.arrayDanneggiati[posizioneX, posizioneY];
 
     }
 

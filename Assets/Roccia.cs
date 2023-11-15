@@ -7,40 +7,36 @@ public class Roccia : Oggetto
     public Sprite rocciaIntera;
     public Sprite rocciaDanneggiata;
     public Sprite rocciaInFinDiVita;
+    public bool finDiVita;
 
     public override void Aggiorna()
     {
-        if (durabilita <= 0)
-        {
-            Destroy(gameObject);
-        }
-
-        if (siStaPerAttivare)
-        {
-            Attivazione();
-            siStaPerAttivare = false;
-        }
-
         if (durabilita == 2)
         {
             GetComponentInChildren<SpriteRenderer>().sprite = rocciaIntera;
-            
-        } else if (durabilita == 1)
+        }
+        if (durabilita == 1)
         {
             GetComponentInChildren<SpriteRenderer>().sprite = rocciaDanneggiata;
-        } else
+        }
+        if (finDiVita)
         {
             GetComponentInChildren<SpriteRenderer>().sprite = rocciaInFinDiVita;
         }
 
-        if (haPresoDanno)
+        if (grighia.copiaDanneggiati[posizioneX, posizioneY] > 0)
         {
-
-            siStaPerAttivare = true;
-            haPresoDanno = false;
+            Attivazione();
+            durabilita -= grighia.copiaDanneggiati[posizioneX, posizioneY];
+            if (durabilita < 1)
+            {
+                if (finDiVita)
+                {
+                    Destroy(gameObject);
+                }
+                finDiVita = true;
+            }
         }
-
-        durabilita -= grighia.arrayDanneggiati[posizioneX, posizioneY];
     }
 
     public override void Attivazione()

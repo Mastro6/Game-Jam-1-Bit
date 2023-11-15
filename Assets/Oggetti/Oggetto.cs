@@ -22,8 +22,8 @@ public abstract class Oggetto : MonoBehaviour
 
     public void RiceveDanno()
     {
-        grighia.arrayDanneggiati[posizioneX, posizioneY] += 1;
-        quantoDanno = grighia.arrayDanneggiati[posizioneX, posizioneY];
+        grighia.DanneggiatoNuovo[posizioneX, posizioneY] += 1;
+        quantoDanno = grighia.DanneggiatoNuovo[posizioneX, posizioneY];
 
     }
 
