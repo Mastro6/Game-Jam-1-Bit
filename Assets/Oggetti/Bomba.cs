@@ -8,25 +8,21 @@ public class Bomba : Oggetto
     public Sprite bombaSprite1;
     public Sprite bombaSprite2;
 
-
-
-
-    
-
-
-
     public override void Aggiorna()
     {
-        GetComponentInChildren<SpriteRenderer>().sprite = bombaSprite1;
-        if (CellaMadre.GetComponent<Cella>().GetX() == 3)
-        {
-            GetComponentInChildren<SpriteRenderer>().sprite = bombaSprite2;
-        }
+        
 
         if(durabilita <= 0)
         {
             Destroy(gameObject);
         }
+
+        GetComponentInChildren<SpriteRenderer>().sprite = bombaSprite1;
+        if (haPresoDanno)
+        {
+            GetComponentInChildren<SpriteRenderer>().sprite = bombaSprite2;
+        }
+
 
         if (haPresoDanno)
         {
@@ -34,6 +30,9 @@ public class Bomba : Oggetto
             Attivazione();
             haPresoDanno = false;
         }
+
+        
+        
 
     }
 
