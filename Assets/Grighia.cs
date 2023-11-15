@@ -22,6 +22,7 @@ public class Grighia : MonoBehaviour {
 
     public GameObject bomba;
     public GameObject micciaPrefab;
+    public GameObject rocciaPrefab;
 
     public Oggetto[,] arrayOggetti;
 
@@ -30,11 +31,12 @@ public class Grighia : MonoBehaviour {
 
     public Color32 coloreBomba;
     public Color32 coloreMiccia;
+    public Color32 coloreRoccia;
 
 
     public GameObject giocatorePrefab;
 
-    public bool[,] arrayDanneggiati;
+    public int[,] arrayDanneggiati;
 
 
     private void Start()
@@ -52,7 +54,7 @@ public class Grighia : MonoBehaviour {
 
         arrayOggetti = new Oggetto[livelloPixel.width, livelloPixel.height];
 
-        arrayDanneggiati = new bool[livelloPixel.width, livelloPixel.height];
+        arrayDanneggiati = new int[livelloPixel.width, livelloPixel.height];
 
 
         for (int x = 0; x < livelloPixel.width; x++)
@@ -83,16 +85,36 @@ public class Grighia : MonoBehaviour {
 
     public void AggiornaGrighia()
     {
+
+        int[,] Danneggiato = new int[arrayOggetti.GetLength(0), arrayOggetti.GetLength(1)];
+
+        for (int x = 0; x < arrayOggetti.GetLength(0); x++)
+        {
+            for (int y = 0; y < arrayOggetti.GetLength(1); y++)
+            {
+
+                Danneggiato[x, y] = arrayDanneggiati[x, y];
+                arrayDanneggiati[x, y] = 0;
+            
+            }
+        }
+
+
         for (int x = 0; x < arrayOggetti.GetLength(0); x++)
         {
             for (int y = 0; y < arrayOggetti.GetLength(1); y++)
             {
                 Oggetto script = arrayOggetti[x, y];
                 if (script) {
-                    if (arrayDanneggiati[x, y])
+
+                    print(x + y + "E danneggiato di un livello " + Danneggiato[x, y]);
+
+
+                    if (Danneggiato[x, y] > 0)
                     {
+                        //script.durabilita -= arrayDanneggiati[x, y];
                         script.haPresoDanno = true;
-                        arrayDanneggiati[x, y] = false;
+                        
                     }
                     
                 }
@@ -109,8 +131,8 @@ public class Grighia : MonoBehaviour {
             {
                 Oggetto script = arrayOggetti[x, y];
                 if (script) script.Aggiorna();
-
                 
+
             }
         }
 
@@ -130,7 +152,7 @@ public class Grighia : MonoBehaviour {
             GameObject conteritore = arrayCelle[x, y].transform.GetChild(0).gameObject;
             bombaTemp.transform.SetParent(conteritore.transform);
             arrayOggetti[x, y] = script;
-            bombaTemp.name = "bomba cella " + x + " " + y;
+            bombaTemp.name = "bomba cella " + x + y;
             script.grighia = this;
             script.posizioneX = x;
             script.posizioneY = y;
@@ -145,11 +167,29 @@ public class Grighia : MonoBehaviour {
             GameObject conteritore = arrayCelle[x, y].transform.GetChild(0).gameObject;
             micciaTemp.transform.SetParent(conteritore.transform);
             arrayOggetti[x, y] = script;
-            micciaTemp.name = "miccia cella " + x + " " + y;
+            micciaTemp.name = "miccia cella " + x + y;
             script.grighia = this;
             script.posizioneX = x;
             script.posizioneY = y;
             return micciaTemp;
+        }
+        if (colore.Equals(coloreRoccia))
+        {
+
+            print("roccia generata");
+            
+            GameObject rocciaTemp = Instantiate(rocciaPrefab, new Vector3(x * dimensioneCella, y * dimensioneCella, 0), Quaternion.identity);
+            Oggetto script = rocciaTemp.GetComponent<Roccia>();
+            script.CellaMadre = arrayCelle[x, y];
+            arrayCelle[x, y].GetComponent<Cella>().oggetto = rocciaTemp;
+            GameObject conteritore = arrayCelle[x, y].transform.GetChild(0).gameObject;
+            rocciaTemp.transform.SetParent(conteritore.transform);
+            arrayOggetti[x, y] = script;
+            rocciaTemp.name = "roccia cella " + x + y;
+            script.grighia = this;
+            script.posizioneX = x;
+            script.posizioneY = y;
+            return rocciaTemp;
         }
         if (colore.Equals(coloreGiocatore))
         {

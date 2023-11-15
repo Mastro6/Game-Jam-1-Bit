@@ -12,7 +12,8 @@ public abstract class Oggetto : MonoBehaviour
     public int posizioneY;
 
     public bool haPresoDanno;
-
+    public int quantoDanno;
+    public bool siStaPerAttivare;
     private void Awake()
     {
         haPresoDanno = false;
@@ -21,7 +22,8 @@ public abstract class Oggetto : MonoBehaviour
 
     public void RiceveDanno()
     {
-        grighia.arrayDanneggiati[posizioneX, posizioneY] = true;
+        grighia.arrayDanneggiati[posizioneX, posizioneY] += 1;
+        quantoDanno = grighia.arrayDanneggiati[posizioneX, posizioneY];
 
     }
 

@@ -10,9 +10,10 @@ public class Bomba : Oggetto
 
     public override void Aggiorna()
     {
+
         
 
-        if(durabilita <= 0)
+        if (durabilita <= 0)
         {
             Destroy(gameObject);
         }
@@ -26,13 +27,19 @@ public class Bomba : Oggetto
 
         if (haPresoDanno)
         {
-            durabilita--;
-            Attivazione();
+            siStaPerAttivare = true;
+            
             haPresoDanno = false;
         }
 
-        
-        
+        if (siStaPerAttivare)
+        {
+            Attivazione();
+            siStaPerAttivare = false;
+        }
+
+
+        durabilita -= grighia.arrayDanneggiati[posizioneX, posizioneY];
 
     }
 
