@@ -23,6 +23,7 @@ public class Grighia : MonoBehaviour {
     public GameObject bomba;
     public GameObject micciaPrefab;
     public GameObject rocciaPrefab;
+    public GameObject pistolaLaserPrefab;
 
     public Oggetto[,] arrayOggetti;
 
@@ -32,6 +33,7 @@ public class Grighia : MonoBehaviour {
     public Color32 coloreBomba;
     public Color32 coloreMiccia;
     public Color32 coloreRoccia;
+    public Color32 colorePistolaLaser;
 
 
     public GameObject giocatorePrefab;
@@ -192,6 +194,21 @@ public class Grighia : MonoBehaviour {
             script.posizioneX = x;
             script.posizioneY = y;
             return rocciaTemp;
+        }
+        if (colore.Equals(colorePistolaLaser))
+        {
+            GameObject pistolaTemp = Instantiate(pistolaLaserPrefab, new Vector3(x * dimensioneCella, y * dimensioneCella, 0), Quaternion.identity);
+            Oggetto script = pistolaTemp.GetComponent<PistolaLaser>();
+            script.CellaMadre = arrayCelle[x, y];
+            arrayCelle[x, y].GetComponent<Cella>().oggetto = pistolaTemp;
+            GameObject conteritore = arrayCelle[x, y].transform.GetChild(0).gameObject;
+            pistolaTemp.transform.SetParent(conteritore.transform);
+            arrayOggetti[x, y] = script;
+            pistolaTemp.name = "pistola Laser " + x + y;
+            script.grighia = this;
+            script.posizioneX = x;
+            script.posizioneY = y;
+            return pistolaTemp;
         }
         if (colore.Equals(coloreGiocatore))
         {
