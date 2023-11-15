@@ -129,14 +129,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11942a468c1bfcf41aee67471bee38d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  durabilita: 1
+  durabilita: 5
   CellaMadre: {fileID: 0}
   grighia: {fileID: 0}
   posizioneX: 0
   posizioneY: 0
-  haPresoDanno: 0
   quantoDanno: 0
   siStaPerAttivare: 0
   pistolaLaserIntegra: {fileID: 1083232804, guid: ac47bd59c29fd974eb31d35e80591634, type: 3}
   pistolaLaserRotta: {fileID: 758136427, guid: ac47bd59c29fd974eb31d35e80591634, type: 3}
   direzione: {x: 1, y: 0}
+  finDiVita: 0

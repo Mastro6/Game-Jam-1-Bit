@@ -45,15 +45,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e17f1fa3971b1214cbe42db38eafef76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  durabilita: 2
+  durabilita: 10
   CellaMadre: {fileID: 0}
   grighia: {fileID: 0}
   posizioneX: 0
   posizioneY: 0
-  haPresoDanno: 0
+  quantoDanno: 0
+  siStaPerAttivare: 0
   rocciaIntera: {fileID: 662414067, guid: ac47bd59c29fd974eb31d35e80591634, type: 3}
   rocciaDanneggiata: {fileID: -2125601238, guid: ac47bd59c29fd974eb31d35e80591634, type: 3}
   rocciaInFinDiVita: {fileID: 1908849375, guid: ac47bd59c29fd974eb31d35e80591634, type: 3}
+  finDiVita: 0
 --- !u!1 &8334324888436141787
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,18 +9,28 @@ public class Bomba : Oggetto
     public Sprite bombaSprite2;
 
     public bool finDiVita;
+    bool nextTurnoMorto;
 
     public override void Aggiorna()
     {
 
 
-        if (durabilita == 1)
+
+        print("oggetto " + gameObject.name + " si sta aggiornando");
+
+        if (nextTurnoMorto)
+        {
+            Destroy(gameObject);
+        }
+
+        if (durabilita > 0)
         {
             GetComponentInChildren<SpriteRenderer>().sprite = bombaSprite1;
         }
         if (finDiVita)
         {
             GetComponentInChildren<SpriteRenderer>().sprite = bombaSprite2;
+            nextTurnoMorto = true;
         }
 
         if (grighia.copiaDanneggiati[posizioneX, posizioneY] > 0)
@@ -36,6 +46,8 @@ public class Bomba : Oggetto
                 finDiVita = true;
             }
         }
+
+        
 
     }
 

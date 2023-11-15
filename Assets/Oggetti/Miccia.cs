@@ -8,17 +8,27 @@ public class Miccia : Oggetto
     public Sprite micciaSpenta;
     public Sprite micciaAttivata;
     public bool finDiVita;
+    private bool nextTurnoMorto;
 
 
     public override void Aggiorna()
     {
-        if(durabilita == 1)
+
+        if (nextTurnoMorto)
+        {
+            Destroy(gameObject);
+        }
+
+
+
+        if (durabilita > 0)
         {
             GetComponentInChildren<SpriteRenderer>().sprite = micciaSpenta;
         }
         if (finDiVita)
         {
             GetComponentInChildren<SpriteRenderer>().sprite = micciaAttivata;
+            nextTurnoMorto = true;
         }
 
         if (grighia.copiaDanneggiati[posizioneX, posizioneY] > 0)
@@ -35,13 +45,16 @@ public class Miccia : Oggetto
             }
         }
 
+        
+
     }
 
     public override void Attivazione()
     {
 
 
-        print("la miccia si +e attivata");
+        print("oggetto " + gameObject.name + " si sta attivando");
+
         if (posizioneX < grighia.livelloPixel.width - 1)
         {
 

@@ -106,30 +106,9 @@ public class Grighia : MonoBehaviour {
         }
 
 
-        for (int x = 0; x < arrayOggetti.GetLength(0); x++)
-        {
-            for (int y = 0; y < arrayOggetti.GetLength(1); y++)
-            {
-                Oggetto script = arrayOggetti[x, y];
-                if (script) {
+        
 
-                    print(x + y + "E danneggiato di un livello " + copiaDanneggiati[x, y]);
-
-
-                    if (copiaDanneggiati[x, y] > 0)
-                    {
-                        script.haPresoDanno = true;
-                        
-                    }
-                    
-                }
-
-
-
-            }
-        }
-
-        print("inizia aggiornamento della grighia");
+        //print("inizia aggiornamento della grighia");
         for (int x = 0; x < arrayOggetti.GetLength(0); x++)
         {
             for (int y = 0; y < arrayOggetti.GetLength(1); y++)
@@ -141,7 +120,7 @@ public class Grighia : MonoBehaviour {
         }
 
         giocatore.Aggiorna();
-        print("fine aggiornamento della grighia");
+        //print("fine aggiornamento della grighia");
     }
 
 
@@ -208,6 +187,24 @@ public class Grighia : MonoBehaviour {
             script.grighia = this;
             script.posizioneX = x;
             script.posizioneY = y;
+            return pistolaTemp;
+        }
+        if (colore.Equals(new Color32(173, 50, 50, 255)))
+        {
+            print("pistola sinistra");
+
+            GameObject pistolaTemp = Instantiate(pistolaLaserPrefab, new Vector3(x * dimensioneCella, y * dimensioneCella, 0), Quaternion.identity);
+            PistolaLaser script = pistolaTemp.GetComponent<PistolaLaser>();
+            script.CellaMadre = arrayCelle[x, y];
+            arrayCelle[x, y].GetComponent<Cella>().oggetto = pistolaTemp;
+            GameObject conteritore = arrayCelle[x, y].transform.GetChild(0).gameObject;
+            pistolaTemp.transform.SetParent(conteritore.transform);
+            arrayOggetti[x, y] = script;
+            pistolaTemp.name = "pistola Laser " + x + y;
+            script.grighia = this;
+            script.posizioneX = x;
+            script.posizioneY = y;
+            script.direzione = new Vector2(-1, 0);
             return pistolaTemp;
         }
         if (colore.Equals(coloreGiocatore))

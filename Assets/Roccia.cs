@@ -8,10 +8,17 @@ public class Roccia : Oggetto
     public Sprite rocciaDanneggiata;
     public Sprite rocciaInFinDiVita;
     public bool finDiVita;
+    bool nextTurnoMorto;
 
     public override void Aggiorna()
     {
-        if (durabilita == 2)
+
+        if (nextTurnoMorto)
+        {
+            Destroy(gameObject);
+        }
+
+        if (durabilita > 1)
         {
             GetComponentInChildren<SpriteRenderer>().sprite = rocciaIntera;
         }
@@ -22,6 +29,7 @@ public class Roccia : Oggetto
         if (finDiVita)
         {
             GetComponentInChildren<SpriteRenderer>().sprite = rocciaInFinDiVita;
+            nextTurnoMorto = true;
         }
 
         if (grighia.copiaDanneggiati[posizioneX, posizioneY] > 0)
@@ -37,10 +45,12 @@ public class Roccia : Oggetto
                 finDiVita = true;
             }
         }
+
+        
     }
 
     public override void Attivazione()
     {
-        
+        //print("oggetto " + gameObject.name + " si sta attivando");
     }
 }

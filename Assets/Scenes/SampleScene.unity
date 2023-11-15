@@ -155,11 +155,12 @@ MonoBehaviour:
   giocatore: {fileID: 0}
   dimensioneCella: 2.5
   CellaVuova: {fileID: 7058239088185413463, guid: 24f0c5e9063c4c24e9e8a9abd8192624, type: 3}
-  livelloPixel: {fileID: 2800000, guid: dcfaf53d448edc3419cc30ef1c86eeb1, type: 3}
+  livelloPixel: {fileID: 2800000, guid: 87c5086e2de6f4f428b565dd460d656d, type: 3}
   arraycolori32temp: []
   bomba: {fileID: 7527773572316966674, guid: 4f5198e8bacd17a4db3ffb63f201be18, type: 3}
   micciaPrefab: {fileID: 7621110323306575493, guid: 1f470951cca0bfd4386b2db68eb99cf0, type: 3}
   rocciaPrefab: {fileID: 6943723784980156987, guid: d8fee6a553ac44e40893449b140a5db2, type: 3}
+  pistolaLaserPrefab: {fileID: 5304969890616517873, guid: a1867794737bd7b4f93e1a6b28c997f8, type: 3}
   coloreGiocatore:
     serializedVersion: 2
     rgba: 4292963931
@@ -172,6 +173,9 @@ MonoBehaviour:
   coloreRoccia:
     serializedVersion: 2
     rgba: 4290227611
+  colorePistolaLaser:
+    serializedVersion: 2
+    rgba: 4281479852
   giocatorePrefab: {fileID: 582139421419661221, guid: 73596e09a8c7b8146aed9e825ff99356, type: 3}
 --- !u!4 &282774138
 Transform:

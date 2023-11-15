@@ -11,13 +11,9 @@ public abstract class Oggetto : MonoBehaviour
     public int posizioneX;
     public int posizioneY;
 
-    public bool haPresoDanno;
     public int quantoDanno;
     public bool siStaPerAttivare;
-    private void Awake()
-    {
-        haPresoDanno = false;
-    }
+    
 
 
     public void RiceveDanno()
