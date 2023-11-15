@@ -131,3 +131,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   durabilita: 1
   CellaMadre: {fileID: 0}
+  grighia: {fileID: 0}
+  posizioneX: 0
+  posizioneY: 0
+  haPresoDanno: 0
+  micciaSpenta: {fileID: -958187202, guid: ac47bd59c29fd974eb31d35e80591634, type: 3}
+  micciaAttivata: {fileID: -1676234525, guid: ac47bd59c29fd974eb31d35e80591634, type: 3}

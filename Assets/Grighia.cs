@@ -21,6 +21,7 @@ public class Grighia : MonoBehaviour {
     public Color32[] arraycolori32temp;
 
     public GameObject bomba;
+    public GameObject micciaPrefab;
 
     public Oggetto[,] arrayOggetti;
 
@@ -28,6 +29,7 @@ public class Grighia : MonoBehaviour {
     public Color32 coloreGiocatore;
 
     public Color32 coloreBomba;
+    public Color32 coloreMiccia;
 
 
     public GameObject giocatorePrefab;
@@ -134,6 +136,21 @@ public class Grighia : MonoBehaviour {
             script.posizioneY = y;
             return bombaTemp;
         }
+        if (colore.Equals(coloreMiccia))
+        {
+            GameObject micciaTemp = Instantiate(micciaPrefab, new Vector3(x * dimensioneCella, y * dimensioneCella, 0), Quaternion.identity);
+            Oggetto script = micciaTemp.GetComponent<Miccia>();
+            script.CellaMadre = arrayCelle[x, y];
+            arrayCelle[x, y].GetComponent<Cella>().oggetto = micciaTemp;
+            GameObject conteritore = arrayCelle[x, y].transform.GetChild(0).gameObject;
+            micciaTemp.transform.SetParent(conteritore.transform);
+            arrayOggetti[x, y] = script;
+            micciaTemp.name = "miccia cella " + x + " " + y;
+            script.grighia = this;
+            script.posizioneX = x;
+            script.posizioneY = y;
+            return micciaTemp;
+        }
         if (colore.Equals(coloreGiocatore))
         {
             GameObject giocatoreObj = Instantiate(giocatorePrefab, new Vector3(x * dimensioneCella, y * dimensioneCella, 0), Quaternion.identity);
@@ -177,12 +194,9 @@ public class Grighia : MonoBehaviour {
             Oggetto ogg = arrayOggetti[0, 0];
             if (ogg)
             {
-                Bomba bombascript = ogg.GetComponent<Bomba>();
-                if (bombascript)
-                {
-                    bombascript.RiceveDanno();
-                    return;
-                }
+
+                ogg.RiceveDanno();
+                return;
             }
 
 
