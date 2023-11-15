@@ -11,26 +11,23 @@ public abstract class Oggetto : MonoBehaviour
     public int posizioneX;
     public int posizioneY;
 
+    public bool haPresoDanno;
+
+    private void Awake()
+    {
+        haPresoDanno = false;
+    }
+
 
     public void RiceveDanno()
     {
-        durabilita--;
-
-        Attivazione();
-
-
-        if (durabilita <= 0)
-        {
-            Distruggi();
-        }
-
-        
+        grighia.arrayDanneggiati[posizioneX, posizioneY] = true;
 
     }
 
     private void Distruggi()
     {
-        Destroy(gameObject);
+        
     }
 
     public abstract void Attivazione();

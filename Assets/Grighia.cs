@@ -32,6 +32,8 @@ public class Grighia : MonoBehaviour {
 
     public GameObject giocatorePrefab;
 
+    public bool[,] arrayDanneggiati;
+
 
     private void Start()
     {
@@ -47,6 +49,8 @@ public class Grighia : MonoBehaviour {
         arrayCelle = new GameObject[livelloPixel.width, livelloPixel.height];
 
         arrayOggetti = new Oggetto[livelloPixel.width, livelloPixel.height];
+
+        arrayDanneggiati = new bool[livelloPixel.width, livelloPixel.height];
 
 
         for (int x = 0; x < livelloPixel.width; x++)
@@ -77,6 +81,24 @@ public class Grighia : MonoBehaviour {
 
     public void AggiornaGrighia()
     {
+        for (int x = 0; x < arrayOggetti.GetLength(0); x++)
+        {
+            for (int y = 0; y < arrayOggetti.GetLength(1); y++)
+            {
+                Oggetto script = arrayOggetti[x, y];
+                if (script) {
+                    if (arrayDanneggiati[x, y])
+                    {
+                        script.haPresoDanno = true;
+                        arrayDanneggiati[x, y] = false;
+                    }
+                    
+                }
+
+
+
+            }
+        }
 
         print("inizia aggiornamento della grighia");
         for (int x = 0; x < arrayOggetti.GetLength(0); x++)
@@ -85,6 +107,7 @@ public class Grighia : MonoBehaviour {
             {
                 Oggetto script = arrayOggetti[x, y];
                 if (script) script.Aggiorna();
+
                 
             }
         }
@@ -105,6 +128,7 @@ public class Grighia : MonoBehaviour {
             GameObject conteritore = arrayCelle[x, y].transform.GetChild(0).gameObject;
             bombaTemp.transform.SetParent(conteritore.transform);
             arrayOggetti[x, y] = script;
+            bombaTemp.name = "bomba cella " + x + " " + y;
             script.grighia = this;
             script.posizioneX = x;
             script.posizioneY = y;
