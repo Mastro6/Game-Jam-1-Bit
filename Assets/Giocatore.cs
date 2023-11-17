@@ -173,7 +173,7 @@ public class Giocatore : MonoBehaviour
                 print("sta guardando verso su e sta rilasciando");
                 //se la casella esiste e se +e vuota
                 print(grighia.arrayCelle[posizioneX, posizioneY + 1].GetComponent<Cella>().EVuota());
-                if (posizioneY == grighia.livelloPixel.height - 1 && grighia.arrayCelle[posizioneX, posizioneY + 1].GetComponent<Cella>().EVuota())
+                if (posizioneY != grighia.livelloPixel.height - 1 && grighia.arrayCelle[posizioneX, posizioneY + 1].GetComponent<Cella>().EVuota())
                 {
 
                     print("la cella sopra e vuota e sta rilasciando qualcosa");
@@ -185,6 +185,7 @@ public class Giocatore : MonoBehaviour
                     inMano.GetComponent<Oggetto>().posizioneY = posizioneY + 1;
                     inMano.SetActive(true);
                     grighia.arrayOggetti[posizioneX, posizioneY + 1] = inMano.GetComponent<Oggetto>();
+                    inMano.transform.position = new Vector3(posizioneX * grighia.dimensioneCella, (posizioneY+1) * grighia.dimensioneCella, 0);
 
 
                     cellaDavantiScript.oggetto = inMano;
