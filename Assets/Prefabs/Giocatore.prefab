@@ -48,10 +48,14 @@ MonoBehaviour:
   grighia: {fileID: 0}
   posizioneX: 0
   posizioneY: 0
+  direzione: {x: 0, y: -1}
   cellaMadre: {fileID: 0}
+  inMano: {fileID: 0}
+  PortaQualcosa: 0
   sprite1: {fileID: 110689811, guid: ac47bd59c29fd974eb31d35e80591634, type: 3}
   sprite2: {fileID: -4633949, guid: ac47bd59c29fd974eb31d35e80591634, type: 3}
   sprite3: {fileID: 1503930666, guid: ac47bd59c29fd974eb31d35e80591634, type: 3}
+  sprite4: {fileID: -733388455, guid: ac47bd59c29fd974eb31d35e80591634, type: 3}
 --- !u!1 &7054408624229317436
 GameObject:
   m_ObjectHideFlags: 0

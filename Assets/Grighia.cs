@@ -255,12 +255,23 @@ public class Grighia : MonoBehaviour {
                 return;
             }
 
-
-
+            
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            if (giocatore.PortaQualcosa)
+            {
+                print("il giocatore porta qualcosa e sta rilasciando");
+                giocatore.PutDown();
+            } else
+            {
+                print("pickeup pressed");
+                giocatore.pickUp();
+            }
             
         }
 
-        
+
     }
 
 

@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11942a468c1bfcf41aee67471bee38d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  durabilita: 5
+  durabilita: 1
   CellaMadre: {fileID: 0}
   grighia: {fileID: 0}
   posizioneX: 0

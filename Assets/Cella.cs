@@ -46,10 +46,7 @@ public class Cella : MonoBehaviour
         
     }
 
-    public GameObject CosaContiene()
-    {
-        return oggetto;
-    }
+    
     
     public bool EVuota()
     {

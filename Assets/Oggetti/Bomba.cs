@@ -16,7 +16,7 @@ public class Bomba : Oggetto
 
 
 
-        print("oggetto " + gameObject.name + " si sta aggiornando");
+        
 
         if (nextTurnoMorto)
         {
@@ -35,7 +35,7 @@ public class Bomba : Oggetto
 
         if (grighia.copiaDanneggiati[posizioneX, posizioneY] > 0)
         {
-            Attivazione();
+            if (!finDiVita) Attivazione();
             durabilita -= grighia.copiaDanneggiati[posizioneX, posizioneY];
             if (durabilita < 1)
             {

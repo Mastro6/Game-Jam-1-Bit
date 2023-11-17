@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e17f1fa3971b1214cbe42db38eafef76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  durabilita: 10
+  durabilita: 2
   CellaMadre: {fileID: 0}
   grighia: {fileID: 0}
   posizioneX: 0
