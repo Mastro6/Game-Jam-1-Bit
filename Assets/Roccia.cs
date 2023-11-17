@@ -53,4 +53,9 @@ public class Roccia : Oggetto
     {
         //print("oggetto " + gameObject.name + " si sta attivando");
     }
+
+    public override void Interagisci()
+    {
+        
+    }
 }

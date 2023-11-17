@@ -85,5 +85,8 @@ public class Bomba : Oggetto
 
     }
 
-    
+    public override void Interagisci()
+    {
+        
+    }
 }

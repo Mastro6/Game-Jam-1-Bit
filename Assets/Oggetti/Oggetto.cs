@@ -31,4 +31,6 @@ public abstract class Oggetto : MonoBehaviour
     public abstract void Attivazione();
 
     public abstract void Aggiorna();
+
+    public abstract void Interagisci();
 }

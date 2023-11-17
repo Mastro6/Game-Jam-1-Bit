@@ -82,4 +82,9 @@ public class PistolaLaser : Oggetto
         }
 
     }
+
+    public override void Interagisci()
+    {
+        print("gira la pistola laser");
+    }
 }

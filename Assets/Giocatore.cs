@@ -12,6 +12,8 @@ public class Giocatore : MonoBehaviour
 
     [SerializeField] private GameObject cellaMadre;
 
+    public bool immobile;
+
 
     public GameObject inMano;
     public bool PortaQualcosa;
@@ -34,7 +36,11 @@ public class Giocatore : MonoBehaviour
     public int GetPosizioneY() { return posizioneY; }
     public void MuoviSu()
     {
-
+        if (immobile)
+        {
+            print("il giocatore non si puo muovere");
+            return;
+        }
         direzione = Vector2.up;
         Aggiorna();
 
@@ -57,7 +63,11 @@ public class Giocatore : MonoBehaviour
 
     public void MuoviGiu()
     {
-
+        if (immobile)
+        {
+            print("il giocatore non si puo muovere");
+            return;
+        }
         direzione = Vector2.down;
         Aggiorna();
 
@@ -80,7 +90,11 @@ public class Giocatore : MonoBehaviour
 
     public void MuoviDestra()
     {
-
+        if (immobile)
+        {
+            print("il giocatore non si puo muovere");
+            return;
+        }
         direzione = Vector2.right;
         Aggiorna();
 
@@ -103,7 +117,11 @@ public class Giocatore : MonoBehaviour
 
     public void MuoviSinistra()
     {
-
+        if (immobile)
+        {
+            print("il giocatore non si puo muovere");
+            return;
+        }
         direzione = Vector2.left;
         Aggiorna();
 
@@ -141,24 +159,107 @@ public class Giocatore : MonoBehaviour
         {
             if (direzione == Vector2.up)
             {
-
-                GameObject cellaDavanti = grighia.arrayCelle[posizioneX, posizioneY + 1];
-                Cella cellaDavantiScript = cellaDavanti.GetComponent<Cella>();
-                if (!cellaDavantiScript.EVuota())
+                // se la casella esiste
+                if (posizioneY != grighia.livelloPixel.height - 1)
                 {
-                    //togliere l'oggetto e tutte le connessioni tra cella e oggetto
-                    inMano = cellaDavantiScript.oggetto;
-                    cellaDavanti.transform.GetChild(0).GetChild(0).transform.parent = null;
-                    inMano.GetComponent<Oggetto>().CellaMadre = null;
-                    grighia.arrayOggetti[posizioneX, posizioneY + 1] = null;
-                    inMano.SetActive(false);
-                    PortaQualcosa = true;
+                    GameObject cellaDavanti = grighia.arrayCelle[posizioneX, posizioneY + 1];
+                    Cella cellaDavantiScript = cellaDavanti.GetComponent<Cella>();
+                    if (!cellaDavantiScript.EVuota())
+                    {
+                        //togliere l'oggetto e tutte le connessioni tra cella e oggetto
+                        inMano = cellaDavantiScript.oggetto;
+                        cellaDavanti.transform.GetChild(0).GetChild(0).transform.parent = null;
+                        inMano.GetComponent<Oggetto>().CellaMadre = null;
+                        grighia.arrayOggetti[posizioneX, posizioneY + 1] = null;
+                        inMano.SetActive(false);
+                        PortaQualcosa = true;
 
-                    cellaDavantiScript.oggetto = null;
-                    return;
-                } else
+                        cellaDavantiScript.oggetto = null;
+                        return;
+                    }
+                    else
+                    {
+                        print("la cella che vuoi fare pick up +e vuota");
+                    }
+                }
+
+            } else if (direzione == Vector2.down)
+            {
+
+                // se la casella esiste
+                if (posizioneY != 0)
                 {
-                    print("la cella che vuoi fare pick up +e vuota");
+                    GameObject cellaDavanti = grighia.arrayCelle[posizioneX, posizioneY - 1];
+                    Cella cellaDavantiScript = cellaDavanti.GetComponent<Cella>();
+                    if (!cellaDavantiScript.EVuota())
+                    {
+                        //togliere l'oggetto e tutte le connessioni tra cella e oggetto
+                        inMano = cellaDavantiScript.oggetto;
+                        cellaDavanti.transform.GetChild(0).GetChild(0).transform.parent = null;
+                        inMano.GetComponent<Oggetto>().CellaMadre = null;
+                        grighia.arrayOggetti[posizioneX, posizioneY - 1] = null;
+                        inMano.SetActive(false);
+                        PortaQualcosa = true;
+
+                        cellaDavantiScript.oggetto = null;
+                        return;
+                    }
+                    else
+                    {
+                        print("la cella che vuoi fare pick up +e vuota");
+                    }
+                }
+            } else if (direzione == Vector2.right)
+            {
+
+                // se la casella esiste
+                if (posizioneX != grighia.livelloPixel.width - 1)
+                {
+                    GameObject cellaDavanti = grighia.arrayCelle[posizioneX +1, posizioneY];
+                    Cella cellaDavantiScript = cellaDavanti.GetComponent<Cella>();
+                    if (!cellaDavantiScript.EVuota())
+                    {
+                        //togliere l'oggetto e tutte le connessioni tra cella e oggetto
+                        inMano = cellaDavantiScript.oggetto;
+                        cellaDavanti.transform.GetChild(0).GetChild(0).transform.parent = null;
+                        inMano.GetComponent<Oggetto>().CellaMadre = null;
+                        grighia.arrayOggetti[posizioneX + 1, posizioneY] = null;
+                        inMano.SetActive(false);
+                        PortaQualcosa = true;
+
+                        cellaDavantiScript.oggetto = null;
+                        return;
+                    }
+                    else
+                    {
+                        print("la cella che vuoi fare pick up +e vuota");
+                    }
+                }
+            } else if (direzione == Vector2.left)
+            {
+
+                // se la casella esiste
+                if (posizioneX != 0)
+                {
+                    GameObject cellaDavanti = grighia.arrayCelle[posizioneX - 1, posizioneY];
+                    Cella cellaDavantiScript = cellaDavanti.GetComponent<Cella>();
+                    if (!cellaDavantiScript.EVuota())
+                    {
+                        //togliere l'oggetto e tutte le connessioni tra cella e oggetto
+                        inMano = cellaDavantiScript.oggetto;
+                        cellaDavanti.transform.GetChild(0).GetChild(0).transform.parent = null;
+                        inMano.GetComponent<Oggetto>().CellaMadre = null;
+                        grighia.arrayOggetti[posizioneX - 1, posizioneY] = null;
+                        inMano.SetActive(false);
+                        PortaQualcosa = true;
+
+                        cellaDavantiScript.oggetto = null;
+                        return;
+                    }
+                    else
+                    {
+                        print("la cella che vuoi fare pick up +e vuota");
+                    }
                 }
             }
         }
@@ -172,7 +273,7 @@ public class Giocatore : MonoBehaviour
             {
                 print("sta guardando verso su e sta rilasciando");
                 //se la casella esiste e se +e vuota
-                print(grighia.arrayCelle[posizioneX, posizioneY + 1].GetComponent<Cella>().EVuota());
+                
                 if (posizioneY != grighia.livelloPixel.height - 1 && grighia.arrayCelle[posizioneX, posizioneY + 1].GetComponent<Cella>().EVuota())
                 {
 
@@ -193,6 +294,141 @@ public class Giocatore : MonoBehaviour
                     inMano = null;
                     PortaQualcosa = false;
                     grighia.AggiornaGrighia();
+                }
+            } else if (direzione == Vector2.down)
+            {
+                print("sta guardando verso su e sta rilasciando");
+                //se la casella esiste e se +e vuota
+
+                if (posizioneY != 0 && grighia.arrayCelle[posizioneX, posizioneY - 1].GetComponent<Cella>().EVuota())
+                {
+
+                    print("la cella sotto e vuota e sta rilasciando qualcosa");
+                    GameObject cellaDavanti = grighia.arrayCelle[posizioneX, posizioneY -1];
+                    Cella cellaDavantiScript = cellaDavanti.GetComponent<Cella>();
+                    inMano.transform.parent = cellaDavanti.transform.GetChild(0);
+                    inMano.GetComponent<Oggetto>().CellaMadre = cellaDavanti;
+                    inMano.GetComponent<Oggetto>().posizioneX = posizioneX;
+                    inMano.GetComponent<Oggetto>().posizioneY = posizioneY -1;
+                    inMano.SetActive(true);
+                    grighia.arrayOggetti[posizioneX, posizioneY -1] = inMano.GetComponent<Oggetto>();
+                    inMano.transform.position = new Vector3(posizioneX * grighia.dimensioneCella, (posizioneY - 1) * grighia.dimensioneCella, 0);
+
+
+                    cellaDavantiScript.oggetto = inMano;
+
+                    inMano = null;
+                    PortaQualcosa = false;
+                    grighia.AggiornaGrighia();
+                }
+            } else if (direzione == Vector2.right)
+            {
+                print("sta guardando verso su e sta rilasciando");
+                //se la casella esiste e se +e vuota
+
+                if (posizioneX != grighia.livelloPixel.width - 1 && grighia.arrayCelle[posizioneX + 1, posizioneY].GetComponent<Cella>().EVuota())
+                {
+
+                    print("la cella sotto e vuota e sta rilasciando qualcosa");
+                    GameObject cellaDavanti = grighia.arrayCelle[posizioneX + 1, posizioneY];
+                    Cella cellaDavantiScript = cellaDavanti.GetComponent<Cella>();
+                    inMano.transform.parent = cellaDavanti.transform.GetChild(0);
+                    inMano.GetComponent<Oggetto>().CellaMadre = cellaDavanti;
+                    inMano.GetComponent<Oggetto>().posizioneX = posizioneX + 1;
+                    inMano.GetComponent<Oggetto>().posizioneY = posizioneY;
+                    inMano.SetActive(true);
+                    grighia.arrayOggetti[posizioneX + 1, posizioneY] = inMano.GetComponent<Oggetto>();
+                    inMano.transform.position = new Vector3((posizioneX + 1) * grighia.dimensioneCella, posizioneY * grighia.dimensioneCella, 0);
+
+
+                    cellaDavantiScript.oggetto = inMano;
+
+                    inMano = null;
+                    PortaQualcosa = false;
+                    grighia.AggiornaGrighia();
+                }
+            } else if (direzione == Vector2.left)
+            {
+                print("sta guardando verso su e sta rilasciando");
+                //se la casella esiste e se +e vuota
+
+                if (posizioneX != 0 && grighia.arrayCelle[posizioneX -1, posizioneY].GetComponent<Cella>().EVuota())
+                {
+
+                    print("la cella sotto e vuota e sta rilasciando qualcosa");
+                    GameObject cellaDavanti = grighia.arrayCelle[posizioneX - 1, posizioneY];
+                    Cella cellaDavantiScript = cellaDavanti.GetComponent<Cella>();
+                    inMano.transform.parent = cellaDavanti.transform.GetChild(0);
+                    inMano.GetComponent<Oggetto>().CellaMadre = cellaDavanti;
+                    inMano.GetComponent<Oggetto>().posizioneX = posizioneX - 1;
+                    inMano.GetComponent<Oggetto>().posizioneY = posizioneY;
+                    inMano.SetActive(true);
+                    grighia.arrayOggetti[posizioneX - 1, posizioneY] = inMano.GetComponent<Oggetto>();
+                    inMano.transform.position = new Vector3((posizioneX - 1) * grighia.dimensioneCella, posizioneY * grighia.dimensioneCella, 0);
+
+
+                    cellaDavantiScript.oggetto = inMano;
+
+                    inMano = null;
+                    PortaQualcosa = false;
+                    grighia.AggiornaGrighia();
+                }
+            }
+        }
+    }
+
+    public void InteragisciDavanti()
+    {
+
+        if (!PortaQualcosa)
+        {
+            if (direzione == Vector2.up)
+            {
+                if (posizioneY != grighia.livelloPixel.height - 1)
+                {
+                    GameObject cellaDavanti = grighia.arrayCelle[posizioneX, posizioneY + 1];
+                    Cella cellaDavantiScript = cellaDavanti.GetComponent<Cella>();
+                    if (!cellaDavantiScript.EVuota())
+                    {
+                        cellaDavantiScript.oggetto.GetComponent<Oggetto>().Interagisci();
+                        immobile = true;
+                    }
+                }
+            } else if (direzione == Vector2.down)
+            {
+                if (posizioneY != 0)
+                {
+                    GameObject cellaDavanti = grighia.arrayCelle[posizioneX, posizioneY - 1];
+                    Cella cellaDavantiScript = cellaDavanti.GetComponent<Cella>();
+                    if (!cellaDavantiScript.EVuota())
+                    {
+                        cellaDavantiScript.oggetto.GetComponent<Oggetto>().Interagisci();
+                        immobile = true;
+                    }
+                }
+            } else if (direzione == Vector2.left)
+            {
+                if (posizioneX != 0)
+                {
+                    GameObject cellaDavanti = grighia.arrayCelle[posizioneX - 1, posizioneY];
+                    Cella cellaDavantiScript = cellaDavanti.GetComponent<Cella>();
+                    if (!cellaDavantiScript.EVuota())
+                    {
+                        cellaDavantiScript.oggetto.GetComponent<Oggetto>().Interagisci();
+                        immobile = true;
+                    }
+                }
+            } else if (direzione == Vector2.right)
+            {
+                if (posizioneX != grighia.livelloPixel.width - 1)
+                {
+                    GameObject cellaDavanti = grighia.arrayCelle[posizioneX + 1, posizioneY];
+                    Cella cellaDavantiScript = cellaDavanti.GetComponent<Cella>();
+                    if (!cellaDavantiScript.EVuota())
+                    {
+                        cellaDavantiScript.oggetto.GetComponent<Oggetto>().Interagisci();
+                        immobile = true;
+                    }
                 }
             }
         }

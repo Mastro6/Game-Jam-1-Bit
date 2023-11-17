@@ -75,7 +75,7 @@ public class Miccia : Oggetto
             if (oggsotto) oggsotto.RiceveDanno();
         }
 
-        if (posizioneX > 1)
+        if (posizioneX > 0)
         {
 
             Oggetto oggsinistra = grighia.arrayOggetti[posizioneX - 1, posizioneY];
@@ -83,6 +83,8 @@ public class Miccia : Oggetto
         }
     }
 
-
-    
+    public override void Interagisci()
+    {
+        RiceveDanno();
+    }
 }

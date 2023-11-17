@@ -247,13 +247,7 @@ public class Grighia : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.K)){
 
 
-            Oggetto ogg = arrayOggetti[0, 0];
-            if (ogg)
-            {
-
-                ogg.RiceveDanno();
-                return;
-            }
+            giocatore.InteragisciDavanti();
 
             
         }
