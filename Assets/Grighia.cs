@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Grighia : MonoBehaviour {
 
@@ -34,6 +35,7 @@ public class Grighia : MonoBehaviour {
     public Color32 coloreMiccia;
     public Color32 coloreRoccia;
     public Color32 colorePistolaLaser;
+    public bool provaPuzzle;
 
 
     public GameObject giocatorePrefab;
@@ -42,13 +44,18 @@ public class Grighia : MonoBehaviour {
 
     public int[,] DanneggiatoNuovo;
 
+    public Texture2D copiaLivello;
+
 
     private void Start()
     {
         print("ciao");
+        provaPuzzle = false;
 
         print(livelloPixel.width);
         print(livelloPixel.height);
+
+        copiaLivello = new Texture2D(livelloPixel.width, livelloPixel.height);
 
         arraycolori32temp = livelloPixel.GetPixels32();
         arraycolori32 = new Color32[livelloPixel.width, livelloPixel.height];
@@ -246,8 +253,17 @@ public class Grighia : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.K)){
 
+            if (!provaPuzzle)
+            {
 
-            giocatore.InteragisciDavanti();
+                provaPuzzle = true;
+                CopiaLivello();
+                giocatore.InteragisciDavanti();
+
+            } else
+            {
+                CaricaLivelloCopiato();
+            }
 
             
         }
@@ -268,9 +284,16 @@ public class Grighia : MonoBehaviour {
 
     }
 
+    public void CopiaLivello()
+    {
+
+    }
 
 
+    public void CaricaLivelloCopiato()
+    {
 
+    }
 
 
 }
