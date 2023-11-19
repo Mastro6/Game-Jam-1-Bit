@@ -286,7 +286,16 @@ public class Grighia : MonoBehaviour {
 
     public void CopiaLivello()
     {
+        for (int x = 0; x < arrayOggetti.GetLength(0); x++)
+        {
+            for (int y = 0; y < arrayOggetti.GetLength(1); y++)
+            {
+                if (arrayCelle[x, y].transform.GetChild(0).GetChild(0)){
 
+                }
+
+            }
+        }
     }
 
 

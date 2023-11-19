@@ -155,7 +155,7 @@ MonoBehaviour:
   giocatore: {fileID: 0}
   dimensioneCella: 2.5
   CellaVuova: {fileID: 7058239088185413463, guid: 24f0c5e9063c4c24e9e8a9abd8192624, type: 3}
-  livelloPixel: {fileID: 2800000, guid: 4f8ea48eba7f73e4faaf96aa53db26b5, type: 3}
+  livelloPixel: {fileID: 2800000, guid: dcfaf53d448edc3419cc30ef1c86eeb1, type: 3}
   arraycolori32temp: []
   bomba: {fileID: 7527773572316966674, guid: 4f5198e8bacd17a4db3ffb63f201be18, type: 3}
   micciaPrefab: {fileID: 7621110323306575493, guid: 1f470951cca0bfd4386b2db68eb99cf0, type: 3}
@@ -176,7 +176,9 @@ MonoBehaviour:
   colorePistolaLaser:
     serializedVersion: 2
     rgba: 4281479852
+  provaPuzzle: 0
   giocatorePrefab: {fileID: 582139421419661221, guid: 73596e09a8c7b8146aed9e825ff99356, type: 3}
+  copiaLivello: {fileID: 0}
 --- !u!4 &282774138
 Transform:
   m_ObjectHideFlags: 0
@@ -278,7 +280,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14, y: 4.9, z: -10}
+  m_LocalPosition: {x: 12.46, y: 4.9, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -313,17 +315,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c75f2e71dc036489b1e6c0a618d342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  durabilita: 0
-  CellaMadre: {fileID: 0}
-  grighia: {fileID: 0}
-  posizioneX: 0
-  posizioneY: 0
-  quantoDanno: 0
-  siStaPerAttivare: 0
-  levaSpenta: {fileID: 0}
-  levaAttivata: {fileID: 0}
-  finDiVita: 0
-  nextTurnoMorto: 0
 --- !u!4 &1274848765
 Transform:
   m_ObjectHideFlags: 0
